@@ -173,6 +173,39 @@ MIT
 
 Goutham Soratoor (grsoratoor@gmail.com)
 
+## Deployment
+
+To deploy a new version to PyPI:
+
+1. Update the version in `pyproject.toml` following [Semantic Versioning](https://semver.org/)
+2. Run the deployment script:
+
+```bash
+# Using Python script (recommended)
+python scripts/deploy.py
+
+# Or using bash script
+./scripts/deploy.sh
+```
+
+The script will:
+1. Clean up previous builds
+2. Install build dependencies
+3. Build the package
+4. Verify the package
+5. Prompt for confirmation before uploading to PyPI
+
+### Prerequisites
+
+- Python 3.11+
+- `build` and `twine` packages (will be installed automatically)
+- PyPI account with access to upload the package
+- Configured `~/.pypirc` with your PyPI credentials or use environment variables:
+  ```bash
+  export TWINE_USERNAME=your_username
+  export TWINE_PASSWORD=your_password
+  ```
+
 ## Contributing
 
 Contributions are welcome! Please read our [contributing guidelines](CONTRIBUTING.md) for more information.
