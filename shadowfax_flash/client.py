@@ -29,6 +29,7 @@ class Environment(str, Enum):
 
     PRODUCTION = "production"
     STAGING = "staging"
+    STAGING1 = "staging1"
 
 
 class ShadowfaxFlashClient:
@@ -36,7 +37,8 @@ class ShadowfaxFlashClient:
 
     BASE_URLS = {
         Environment.PRODUCTION: "https://flash-api.shadowfax.in",
-        Environment.STAGING: "https://hlbackend3.staging.shadowfax.in",
+        Environment.STAGING: "https://hlbackend.staging.shadowfax.in",
+        Environment.STAGING1: "https://hlbackend2.staging.shadowfax.in",
     }
 
     def __init__(

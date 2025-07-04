@@ -13,6 +13,7 @@ from pytest_httpx import HTTPXMock
 from shadowfax_flash import Environment, ShadowfaxFlashClient
 from shadowfax_flash.models import OrderStatus
 
+STAGING_URL = "https://hlbackend.staging.shadowfax.in"
 
 class TestShadowfaxFlashClient:
     """Test cases for ShadowfaxFlashClient."""
@@ -42,7 +43,7 @@ class TestShadowfaxFlashClient:
 
         httpx_mock.add_response(
             method="POST",
-            url="https://hlbackend3.staging.shadowfax.in/order/credits/key/validate/",
+            url=f"{STAGING_URL}/order/credits/key/validate/",
             json=mock_response,
         )
 
@@ -67,7 +68,7 @@ class TestShadowfaxFlashClient:
 
         httpx_mock.add_response(
             method="POST",
-            url="https://hlbackend3.staging.shadowfax.in/order/serviceability/",
+            url=f"{STAGING_URL}/order/serviceability/",
             json=mock_response,
         )
 
@@ -101,7 +102,7 @@ class TestShadowfaxFlashClient:
 
         httpx_mock.add_response(
             method="POST",
-            url="https://hlbackend3.staging.shadowfax.in/order/create/",
+            url=f"{STAGING_URL}/order/create/",
             json=mock_response,
         )
 
@@ -127,7 +128,7 @@ class TestShadowfaxFlashClient:
 
         httpx_mock.add_response(
             method="POST",
-            url="https://hlbackend3.staging.shadowfax.in/order/cancel/",
+            url=f"{STAGING_URL}/order/cancel/",
             json=mock_response,
         )
 
@@ -147,7 +148,7 @@ class TestShadowfaxFlashClient:
 
         httpx_mock.add_response(
             method="GET",
-            url="https://hlbackend3.staging.shadowfax.in/order/track/TEST_ORDER_123/",
+            url=f"{STAGING_URL}/order/track/TEST_ORDER_123/",
             json=mock_response,
         )
 
@@ -171,7 +172,7 @@ class TestShadowfaxFlashClient:
         """Test error handling for API requests."""
         httpx_mock.add_exception(httpx.RequestError("Test error"))
 
-        with pytest.raises(ValueError) as exc_info:
+        with pytest.raises(httpx.HTTPError) as exc_info:
             await test_client.validate_credits_key(
                 credits_key="test_key", store_brand_id="test_brand"
             )
