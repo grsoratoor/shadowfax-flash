@@ -33,6 +33,7 @@ class CancelledBy(str, Enum):
 class CancelReason(str, Enum):
     """Enum representing cancellation reasons."""
 
+    EMPTY = ""
     CUSTOMER_CANCELLED = "Cancelled by Customer"
     RIDER_NOT_AVAILABLE = "Rider Not Available or is Late"
     CUSTOMER_NOT_AVAILABLE = "Customer Not Available"
@@ -155,6 +156,7 @@ class OrderTrackResponse(BaseModel):
 
     order_id: str
     status: OrderStatus
+    sfx_order_id: Optional[str] = None
     event_time: Optional[str] = None
     rider_contact_number: Optional[str] = None
     rider_latitude: Optional[float] = None
@@ -162,5 +164,6 @@ class OrderTrackResponse(BaseModel):
     rider_id: Optional[int] = None
     rider_name: Optional[str] = None
     rts_reason: Optional[str] = None
+    tracking_url: Optional[str] = None
     cancelled_by: Optional[CancelledBy] = None
     cancel_reason: Optional[CancelReason] = None
