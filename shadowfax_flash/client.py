@@ -171,8 +171,8 @@ class ShadowfaxFlashClient:
             user_details = user_details.model_dump(exclude_none=True)
 
         payload = {
-            "pickup": pickup_details,
-            "drop": drop_details,
+            "pickup_details": pickup_details,
+            "drop_details": drop_details,
             "order_details": order_details,
             "user_details": user_details,
         }
