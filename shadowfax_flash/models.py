@@ -11,6 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 class OrderStatus(str, Enum):
     """Enum representing order statuses."""
 
+    CREATED = "CREATED"
     ALLOTTED = "ALLOTTED"
     ACCEPTED = "ACCEPTED"
     ARRIVED = "ARRIVED"
