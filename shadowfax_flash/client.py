@@ -90,24 +90,12 @@ class ShadowfaxFlashClient:
         url = f"{self.base_url}{endpoint}"
         headers = {**self._headers, **kwargs.pop("headers", {})}
 
-        try:
-            response = await self._client.request(
-                method=method, url=url, headers=headers, **kwargs
-            )
-            response.raise_for_status()
-            return response.json()
+        response = await self._client.request(
+            method=method, url=url, headers=headers, **kwargs
+        )
+        response.raise_for_status()
+        return response.json()
 
-        except httpx.HTTPStatusError as e:
-            error_data = e.response.json()
-            error_msg = error_data.get("message", str(e))
-            logger.error(f"API Error ({e.response.status_code}): {error_msg}")
-            raise ValueError(
-                f"API Error ({e.response.status_code}): {error_msg}"
-            ) from e
-
-        except httpx.RequestError as e:
-            logger.error(f"Request failed: {str(e)}")
-            raise ValueError(f"Request failed: {str(e)}") from e
 
     async def validate_credits_key(
         self, credits_key: str, store_brand_id: str
